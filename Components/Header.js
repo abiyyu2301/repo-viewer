@@ -35,11 +35,10 @@ const AuthorizedHeader = (props) => {
             hideBack,
             logoutAction
             } = props.props
-    console.log(props)
     return (
         <View style={styles.defaultHeader}>
             {hideBack? null : 
-            <TouchableOpacity onClick={onBack} style={styles.backBtnContainer}>
+            <TouchableOpacity onPress={onBack} style={styles.backBtnContainer}>
                 <Image source={Images.leftArrow} style={styles.backIcon} />
             </TouchableOpacity>}
             <Text style={{flex: 3, textAlign: 'center'}} >{'MyRepoViewer'}</Text>
@@ -50,7 +49,7 @@ const AuthorizedHeader = (props) => {
 
 const LogoutButton = (logoutAction) => {
     return (
-        <TouchableOpacity onClick={logoutAction} style={styles.logoutStyle}>
+        <TouchableOpacity onPress={logoutAction} style={styles.logoutStyle}>
             <Text>Logout</Text>
         </TouchableOpacity>
     )

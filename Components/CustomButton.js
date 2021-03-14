@@ -16,7 +16,7 @@ export default function CustomButton(props) {
         <View>
             <TouchableOpacity
                 style = {styles.buttonStyle}
-                onClick = {onClick}
+                onPress = {onClick}
             >
                 <Text>{text}</Text>
             </TouchableOpacity>

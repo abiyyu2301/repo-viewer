@@ -8,14 +8,20 @@ import {
 import CustomInput from '../Components/CustomInput'
 import CustomButton from '../Components/CustomButton'
 import Header from '../Components/Header'
+import {AUTHORIZED_HEADER} from '../Constants'
+import { sub } from 'react-native-reanimated';
 
 
 
-const RepoInputScreen = () => {
+const RepoInputScreen = ({navigation}) => {
+
+  const submitAction = () => {
+    navigation.navigate('CommitsScreen')
+  }
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Header hideBack/>
+      <Header type={AUTHORIZED_HEADER} hideBack/>
       <View style={styles.container}>
         <View style={styles.inputStyle}>
           <CustomInput 
@@ -24,7 +30,8 @@ const RepoInputScreen = () => {
           />
         </View>
         <CustomButton
-          text={'SUBMIT'} 
+          text={'SUBMIT'}
+          onClick={() => submitAction()}
         />
       </View>
     </SafeAreaView>

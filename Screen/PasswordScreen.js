@@ -8,12 +8,13 @@ import {
 import CustomInput from '../Components/CustomInput'
 import CustomButton from '../Components/CustomButton'
 import Header from '../Components/Header'
-import {AUTHORIZED_HEADER} from '../Constants'
 
 
 
-const PasswordScreen = () => {
-
+const PasswordScreen = ({navigation}) => {
+  const submitAction = () => {
+    navigation.navigate('RepoInputScreen')
+  }
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header />
@@ -26,7 +27,8 @@ const PasswordScreen = () => {
           />
         </View>
         <CustomButton
-          text={'SUBMIT'} 
+          text={'SUBMIT'}
+          onClick={() => submitAction()}
         />
       </View>
     </SafeAreaView>

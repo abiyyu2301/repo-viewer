@@ -8,11 +8,14 @@ import {
 import CustomInput from '../Components/CustomInput'
 import CustomButton from '../Components/CustomButton'
 import Header from '../Components/Header'
+import { sub } from 'react-native-reanimated';
 
 
 
-const UsernameScreen = () => {
-
+const UsernameScreen = ({navigation}) => {
+  const submitAction = () => {
+    navigation.navigate('PasswordScreen')
+  }
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header />
@@ -24,7 +27,8 @@ const UsernameScreen = () => {
           />
         </View>
         <CustomButton
-          text={'SUBMIT'} 
+          text={'SUBMIT'}
+          onClick={()=>{submitAction()}}
         />
       </View>
     </SafeAreaView>

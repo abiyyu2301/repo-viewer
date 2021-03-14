@@ -32,7 +32,7 @@ const DATA = [
   }
 ]
 
-const CommitsScreen = () => {
+const CommitsScreen = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (<GitCommit
@@ -44,7 +44,7 @@ const CommitsScreen = () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Header type={AUTHORIZED_HEADER} />
+      <Header onBack={() => navigation.goBack()} type={AUTHORIZED_HEADER} />
       <View style={styles.container}>
         <Text style={styles.repoTitle}>{'facebook/react-native'}</Text>
         <FlatList

@@ -1,3 +1,3 @@
 export default images = {
-    leftArrow: require('../Images/left-arrow.png')
+    leftArrow: require('../Images/left-arrow.png'),
 }

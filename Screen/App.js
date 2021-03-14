@@ -1,14 +1,18 @@
-import React from 'react';
+import React from 'react'
 import {
   SafeAreaView,
   StyleSheet,
   View,
   FlatList,
   Text
-} from 'react-native';
-import GitCommit from '../Components/GitCommit'
-import Header from '../Components/Header'
-import {AUTHORIZED_HEADER} from '../Constants'
+} from 'react-native'
+import UsernameScreen from '../Screen/UsernameScreen'
+import PasswordScreen from '../Screen/PasswordScreen'
+import CommitsScreen from '../Screen/CommitsScreen'
+import RepoInputScreen from '../Screen/RepoInputScreen'
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 const DATA = [
@@ -34,26 +38,22 @@ const DATA = [
 
 const App = () => {
 
-  const renderItem = ({item}) => {
-    return (<GitCommit
-      author={item.author}
-      message={item.message}
-      commitTime={item.commitTime} 
-    />)
-  }
+  const Stack = createStackNavigator();
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Header type={AUTHORIZED_HEADER} />
-      <View style={styles.container}>
-        <Text style={styles.repoTitle}>{'facebook/react-native'}</Text>
-        <FlatList
-          data={DATA}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+    <Stack.Navigator
+      initialRouteName={'UsernameScreen'}
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+        <Stack.Screen name='UsernameScreen' component={UsernameScreen} />
+        <Stack.Screen name='PasswordScreen' component={PasswordScreen} />
+        <Stack.Screen name='CommitsScreen' component={CommitsScreen} />
+        <Stack.Screen name='RepoInputScreen' component={RepoInputScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
