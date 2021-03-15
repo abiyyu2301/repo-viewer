@@ -17,4 +17,4 @@ Before running the app please make sure that you have the latest updated React-N
 ![iOS Demo Gif ](demo/ios-demo.gif)
 
 ### Android Demo
-![Android Demo Gif](demo/android-demo.gif)
+<img src="./demo/android-demo.gif" width="300" height="600">
