@@ -14,7 +14,7 @@ Before running the app please make sure that you have the latest updated React-N
 
 ## Demo
 ### iOS Demo
-[](./demo/ios-demo.gif)
+[](demo/ios-demo.gif)
 
 ### Android Demo
-[](./demo/android-demo.gif)
+[](demo/android-demo.gif)
