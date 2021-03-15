@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,7 +8,6 @@ import {
 import CustomInput from '../Components/CustomInput'
 import CustomButton from '../Components/CustomButton'
 import Header from '../Components/Header'
-import { sub } from 'react-native-reanimated';
 
 
 
@@ -17,7 +16,7 @@ const UsernameScreen = ({navigation}) => {
     navigation.navigate('PasswordScreen')
   }
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: '#e3e3e3', flex: 1}}>
       <Header />
       <View style={styles.container}>
         <View style={styles.inputStyle}>

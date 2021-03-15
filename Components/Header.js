@@ -11,6 +11,8 @@ Header.propTypes = {
     hideBack: PropTypes.bool,
 }
 
+const APP_TITLE = 'RepoViewer'
+
 export default function Header(props) {
     const {type} = props
     switch (type) {
@@ -24,7 +26,7 @@ export default function Header(props) {
 const DefaultHeader = () => {
     return (
         <View style={styles.defaultHeader}>
-            <Text>{'MyRepoViewer'}</Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{APP_TITLE}</Text>
         </View>
     )
 }
@@ -41,13 +43,13 @@ const AuthorizedHeader = (props) => {
             <TouchableOpacity onPress={onBack} style={styles.backBtnContainer}>
                 <Image source={Images.leftArrow} style={styles.backIcon} />
             </TouchableOpacity>}
-            <Text style={{flex: 3, textAlign: 'center'}} >{'MyRepoViewer'}</Text>
+            <Text style={{flex: 3, textAlign: 'center', fontSize: 20, fontWeight: 'bold'}} >{APP_TITLE}</Text>
             <LogoutButton logoutAction={logoutAction} />
         </View>
     )
 }
 
-const LogoutButton = (logoutAction) => {
+const LogoutButton = ({logoutAction}) => {
     return (
         <TouchableOpacity onPress={logoutAction} style={styles.logoutStyle}>
             <Text>Logout</Text>
@@ -62,7 +64,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         overflow: 'visible',
         height: 70,
-        paddingHorizontal: 15
+        backgroundColor: '#e3e3e3',
+        paddingHorizontal: 15,
+        borderBottomWidth: 1,
     },
     backBtnContainer: {
         flex: 1,
@@ -75,7 +79,8 @@ const styles = StyleSheet.create({
     logoutStyle: {
         flex: 1,
         padding: 5,
-        backgroundColor: 'red',
+        borderRadius: 5,
+        backgroundColor: '#cb3737',
         justifyContent: 'center',
         alignItems: 'center'
     }

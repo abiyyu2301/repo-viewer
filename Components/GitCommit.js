@@ -18,14 +18,16 @@ export default function GitCommit(props) {
             <Image
                 style = {styles.avatarStyle}
                 source={{
-                    uri: 'https://reactnative.dev/img/tiny_logo.png',
+                    uri: avatar,
                 }}
             />
             <View style={styles.wrapper}>
-                <Text>{message}</Text>
+                <Text numberOfLines={1} ellipsizeMode='tail'>{message}</Text>
                 <View style={styles.authorText}>
-                    <Text>{author}</Text>
-                    <Text>{` committed ${commitTime}`}</Text>
+                    <Text style={{fontWeight: 'bold'}} >{author}</Text>
+                    <View flex={1}>
+                        <Text>{`Committed ${commitTime}`}</Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -38,18 +40,20 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         padding: 20,
-        marginVertical: 10
+        marginVertical: 10,
+        backgroundColor: '#fafafa'
     },
     wrapper: {
+        flex: 1,
         flexDirection: 'column',
         marginHorizontal: 10
     },
     authorText: {
-        flexDirection: 'row'
+        flex: 1
     },
     avatarStyle: {
-        width: 30,
-        height: 30,
+        width: 50,
+        height: 50,
         borderRadius: 5,
         alignSelf: 'center'
     }

@@ -1,57 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import {
   SafeAreaView,
   StyleSheet,
   View,
   FlatList,
-  Text
-} from 'react-native';
+  Text,
+  ActivityIndicator
+} from 'react-native'
+import Moment from 'moment'
 import GitCommit from '../Components/GitCommit'
 import Header from '../Components/Header'
 import {AUTHORIZED_HEADER} from '../Constants'
+import moment from 'moment'
 
+const CommitsScreen = ({navigation, route}) => {
+  const {orgRepo} = route.params
+  const [isLoading, setLoading] = useState(true)
+  const [data, setData] = useState([])
+  const [page, setPage] = useState(1)
 
-const DATA = [
-  {
-    id: '1',
-    author: 'abiyyu123',
-    message: 'merged something',
-    commitTime: '1 hour ago'
-  },
-  {
-    id: '2',
-    author: 'abiyyu123',
-    message: 'I have done something',
-    commitTime: '2 hours ago'
-  },
-  {
-    id: '3',
-    author: 'abiyyu123',
-    message: 'I am now creating something',
-    commitTime: '3 hours ago'
-  }
-]
-
-const CommitsScreen = ({navigation}) => {
+  useEffect(() => {
+    const url = `https://api.github.com/repos/${orgRepo}/commits?${new URLSearchParams({
+      per_page: 10,
+      page: page
+    })}`
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    })
+    .then((response) => response.json())
+    .then((response) => {
+                      setData(data.concat(response))})
+    .catch((error) => console.log(error))
+    .finally(() => setLoading(false))
+  }, [])
 
   const renderItem = ({item}) => {
+    moment.locale('en')
+    const avatar = item.author? item.author.avatar_url : null
+    const author = item.commit? item.commit.author.name :null
+    const message = item.commit? item.commit.message : null
+    let commitTime = item.commit? item.commit.author.date : null
+    commitTime = Moment(commitTime).format('LLL')
     return (<GitCommit
-      author={item.author}
-      message={item.message}
-      commitTime={item.commitTime} 
+      avatar={avatar}
+      author={author}
+      message={message}
+      commitTime={commitTime} 
     />)
   }
 
+  const getMoreCommits = () => {
+    console.log('This is called')
+    setLoading(true)
+    setPage(page+1)
+  }
+
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Header onBack={() => navigation.goBack()} type={AUTHORIZED_HEADER} />
+    <SafeAreaView style={{flex: 1, backgroundColor: '#e3e3e3'}}>
+      <Header logoutAction={() => navigation.navigate('UsernameScreen')} onBack={() => navigation.goBack()} type={AUTHORIZED_HEADER} />
       <View style={styles.container}>
-        <Text style={styles.repoTitle}>{'facebook/react-native'}</Text>
+        <Text style={styles.repoTitle}>{orgRepo}</Text> 
+        { data.length > 0 && 
         <FlatList
-          data={DATA}
+          data={data}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.sha + item.commit.author.date}
+          onEndReached={getMoreCommits}
+          onEndReachedThreshold={0.5}
         />
+        }
+        {isLoading && <ActivityIndicator style={styles.loadingStyle} />}
       </View>
     </SafeAreaView>
   )
@@ -61,9 +82,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    paddingVertical: 10,
     paddingHorizontal: 15,
   },
   repoTitle: {
+    alignSelf: 'center'
+  },
+  loadingStyle: {
     alignSelf: 'center'
   }
 })

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,10 +13,11 @@ import Header from '../Components/Header'
 
 const PasswordScreen = ({navigation}) => {
   const submitAction = () => {
+    const url = `https://api.github.com/users/hey`
     navigation.navigate('RepoInputScreen')
   }
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{backgroundColor: '#e3e3e3', flex: 1}}>
       <Header />
       <View style={styles.container}>
         <View style={styles.inputStyle}>

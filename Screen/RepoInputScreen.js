@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,24 +9,25 @@ import CustomInput from '../Components/CustomInput'
 import CustomButton from '../Components/CustomButton'
 import Header from '../Components/Header'
 import {AUTHORIZED_HEADER} from '../Constants'
-import { sub } from 'react-native-reanimated';
 
 
 
 const RepoInputScreen = ({navigation}) => {
+  const [orgRepo, setOrgrepo] = useState('facebook/react-native')
 
   const submitAction = () => {
-    navigation.navigate('CommitsScreen')
+    navigation.navigate('CommitsScreen', {orgRepo: orgRepo})
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Header type={AUTHORIZED_HEADER} hideBack/>
+    <SafeAreaView style={{backgroundColor: '#e3e3e3', flex: 1}}>
+      <Header logoutAction={() => navigation.navigate('UsernameScreen')} type={AUTHORIZED_HEADER} hideBack/>
       <View style={styles.container}>
         <View style={styles.inputStyle}>
           <CustomInput 
             title={'Enter a Repo You Want To See'}
-            text={'facebook/react-native'}
+            text={orgRepo}
+            onChangeText={setOrgrepo}
           />
         </View>
         <CustomButton
