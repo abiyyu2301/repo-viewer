@@ -12,3 +12,9 @@ Before running the app please make sure that you have the latest updated React-N
 4. If running on ios do `cd ios && pod install && cd ..`
 5. Run `react-native run-ios` or `react-native run-android`
 
+## Demo
+### iOS Demo
+[](./demo/ios-demo.gif)
+
+### Android Demo
+[](./demo/android-demo.gif)
