@@ -12,8 +12,9 @@ import Header from '../Components/Header'
 
 
 const UsernameScreen = ({navigation}) => {
+  const [username, setUsername] = useState('')
   const submitAction = () => {
-    navigation.navigate('PasswordScreen')
+    navigation.navigate('PasswordScreen', {username: username})
   }
   return (
     <SafeAreaView style={{ backgroundColor: '#e3e3e3', flex: 1}}>
@@ -22,6 +23,8 @@ const UsernameScreen = ({navigation}) => {
         <View style={styles.inputStyle}>
           <CustomInput 
             title={'Username'}
+            value={username}
+            onChangeText={setUsername}
             placeholder={'Username'}
           />
         </View>
